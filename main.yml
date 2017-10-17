@@ -1,0 +1,13 @@
+---
+- hosts: web
+  become: yes
+  remote_user: vagrant
+  vars:
+    Env_Name: "{{ ENV }}"
+  vars_files:
+       - vars
+  tasks:
+     - name: "execute the file"
+       command: sh /home/vagrant/abc.sh
+
+    #- include: tasks.yml

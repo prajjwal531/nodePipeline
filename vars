@@ -1,0 +1,7 @@
+---
+DEV:
+  ENV: 'DEV'
+  PORT: 8002
+QA:
+  ENV: 'QA'
+  PORT: 8001

@@ -1,0 +1,42 @@
+---
+  - name: "Installing node packages"
+    apt:
+        name: "{{ item }}"
+        state: present
+    with_items:
+              - nodejs-legacy
+              - npm
+
+  - name: "Checking to see if node project is running"
+    shell: echo "hello"
+
+  - name: "Creating the root path for specific Environment"
+    file:
+       path: "/opt/ENV/{{ Env_Name }}"
+       state: directory
+       mode: 0755
+
+  - name: "copying the code to specific directory of Environment"
+    synchronize:
+          src: bbycaSRE/
+          dest: "/opt/ENV/{{ Env_Name }}/"
+
+  - name: "Installing supporting NPM packages"
+    shell: "npm install {{ item }}"
+    args:
+      chdir: "/opt/ENV/{{ Env_Name }}/"
+    with_items:
+             - express
+             - ejs
+             - path
+
+  - name: "Starting the node project on {{ Env_Name }} Environment"
+    shell: echo "PORT='{{ DEV.PORT }}' ENV='{{ DEV.ENV }}' node /opt/ENV/{{ Env_Name }}/bestbuy.ca.js &" > abc.sh
+
+  - name: "change file permission"
+    file:
+       path: /home/vagrant/abc.sh
+       mode: 0755
+
+  - name: "execute the file"
+    shell: /home/vagrant/abc.sh
