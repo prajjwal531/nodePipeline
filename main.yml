@@ -1,7 +1,7 @@
 ---
-- hosts: web
-  become: yes
-  remote_user: vagrant
+- hosts: key_prajjwalkey # Please change this key based on what you have used to create instances.
+  user: ubuntu
+  sudo: yes
   vars:
     Env_Name: "{{ ENVR }}"
   vars_files:
