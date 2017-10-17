@@ -1,0 +1,69 @@
+EC2-Instance:
+       Instance1:
+           Instance-Name: 'Instance1'
+           ami-id: "ami-d47182ac"
+           SecurityGroups:
+                   - ec2-sg2
+           instanceType: 't2.micro'
+           max-count: 1
+           min-count: 1
+           DeviceName: '/dev/sdh'
+           VirtualName: 'prajjwalkey'
+           Encrypted: False
+           SnapshotId: 'snap-02cc1e40d2e121683'
+           DeleteOnTermination: True
+           KeyName: 'prajjwalkey'
+           VolumeSize: 10
+           VolumeType: 'gp2'
+           ImageId: 'ami-6e1a0117'
+           # if this option is set to be true then it will create the new instance
+           re-create: True
+           AvailabilityZone: "us-west-2a"
+
+SecurityGroups:
+      Group2:
+          name: 'ec2-sg2'
+          description: "This is a test"
+          mappings:
+           inBound_mapping:
+              mapping1:
+                IpProtocol: tcp
+                FromPort: 80
+                ToPort: 80
+                IpRanges: ""0.0.0.0/0""
+              mapping2:
+                IpProtocol: tcp
+                FromPort: 8004
+                ToPort: 8004
+                IpRanges: ""0.0.0.0/0""
+              mapping3:
+                IpProtocol: tcp
+                FromPort: 22
+                ToPort: 22
+                IpRanges: "0.0.0.0/0"
+              mapping3:
+                IpProtocol: tcp
+                FromPort: 8001
+                ToPort: 8001
+                IpRanges: "0.0.0.0/0"
+              mapping3:
+                IpProtocol: tcp
+                FromPort: 8002
+                ToPort: 8002
+                IpRanges: "0.0.0.0/0"
+              mapping3:
+                IpProtocol: tcp
+                FromPort: 8003
+                ToPort: 8003
+                IpRanges: "0.0.0.0/0"
+           outBound_mapping:
+              mapping1:
+                IpProtocol: tcp
+                FromPort: 80
+                ToPort: 80
+                IpRanges: "0.0.0.0/0"
+              mapping2:
+                IpProtocol: tcp
+                FromPort: 8080
+                ToPort: 8080
+                IpRanges: "0.0.0.0/0"
