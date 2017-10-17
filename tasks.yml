@@ -30,13 +30,26 @@
              - ejs
              - path
 
-  - name: "Starting the node project on {{ Env_Name }} Environment"
-    shell: echo "PORT='{{ DEV.PORT }}' ENV='{{ DEV.ENV }}' node /opt/ENV/{{ Env_Name }}/bestbuy.ca.js &" > abc.sh
+  - name: "Starting the node project on Dev Environment"
+    shell: echo "PORT='{{ DEV.PORT }}' ENV='{{ DEV.ENV }}' node /opt/ENV/{{ Env_Name }}/bestbuy.ca.js &" >{{ Env_Name }}.sh
+    when: Env_Name == 'DEV'
+
+  - name: "Starting the node project on QA Environment"
+    shell: echo "PORT='{{ QA.PORT }}' ENV='{{ QA.ENV }}' node /opt/ENV/{{ Env_Name }}/bestbuy.ca.js &" >{{ Env_Name }}.sh
+    when: Env_Name == 'QA'
+
+  - name: "Starting the node project on DR Environment"
+    shell: echo "PORT='{{ DR.PORT }}' ENV='{{ DR.ENV }}' node /opt/ENV/{{ Env_Name }}/bestbuy.ca.js &" >{{ Env_Name }}.sh
+    when: Env_Name == 'DR'
+
+  - name: "Starting the node project on PROD Environment"
+    shell: echo "PORT='{{ PROD.PORT }}' ENV='{{ PROD.ENV }}' node /opt/ENV/{{ Env_Name }}/bestbuy.ca.js &" >{{ Env_Name }}.sh
+    when: Env_Name == 'PROD'
 
   - name: "change file permission"
     file:
-       path: /home/vagrant/abc.sh
-       mode: 0755
+       path: /home/vagrant/{{ Env_Name }}.sh
+       mode: 777
 
   - name: "execute the file"
-    shell: /home/vagrant/abc.sh
+    command: sh /home/vagrant/{{ Env_Name }}.sh

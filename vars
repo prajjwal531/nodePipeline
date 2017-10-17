@@ -3,5 +3,11 @@ DEV:
   ENV: 'DEV'
   PORT: 8002
 QA:
-  ENV: 'QA'
+  ENV: 'TEST'
   PORT: 8001
+DR:
+  ENV: 'DR'
+  PORT: 8003
+PROD:
+  ENV: 'PROD'
+  PORT: 8004

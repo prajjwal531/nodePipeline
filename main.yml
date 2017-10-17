@@ -3,11 +3,8 @@
   become: yes
   remote_user: vagrant
   vars:
-    Env_Name: "{{ ENV }}"
+    Env_Name: "{{ ENVR }}"
   vars_files:
        - vars
   tasks:
-     - name: "execute the file"
-       command: sh /home/vagrant/abc.sh
-
-    #- include: tasks.yml
+    - include: tasks.yml
